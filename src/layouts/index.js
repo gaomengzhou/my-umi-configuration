@@ -1,28 +1,38 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import { connect } from 'dva';
+import React, { useEffect, useState } from 'react';
 import withRouter from 'umi/withRouter';
 import MenuBar from '../components/MenuBar';
 import styles from './index.css';
 
+
+
 function BasicLayout(props) {
-  const { children, location } = props;
   console.log(props)
-  let isMenubar = false;
-  if (
-    location.pathname !== '/home'
-    && location.pathname !== '/shop'
-    && location.pathname !== '/mine'
-    && location.pathname !== '/category'
-  ) {
-    isMenubar = true
+  const [isMenubar, setMenubar] = useState(false)
+  const {
+    children,
+    location: {
+      pathname
+    }
+  } = props;
+  const reg = /^(\/home|\/shop|\/mine|\/category|\/home\/|\/shop\/|\/mine\/|\/category\/)$/
+  if (!reg.test(pathname)) {
+    useEffect(() => {
+      setMenubar(true)
+    }, [pathname])
   } else {
-    isMenubar = false
+    useEffect(() => {
+      setMenubar(false)
+    }, [pathname])
   }
   return (
     <div className={styles.normal}>
       {
         isMenubar
           ? children
-          : <MenuBar pathname={location.pathname} isMenubar={isMenubar}>{children}</MenuBar>
+          : <MenuBar pathname={pathname} isMenubar={isMenubar}>{children}</MenuBar>
       }
     </div>
   );

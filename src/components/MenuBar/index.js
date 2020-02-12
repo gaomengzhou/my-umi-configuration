@@ -11,25 +11,25 @@ const tabBarData = [
     title: '首页',
     icon: 'shouye',
     selectedIcon: 'shouye',
-    link: '/home',
+    link: 'home',
   },
   {
     title: '分类',
     icon: 'fenlei',
     selectedIcon: 'fenlei',
-    link: '/category',
+    link: 'category',
   },
   {
     title: '购物车',
     icon: 'cart_icon',
     selectedIcon: 'cart_icon',
-    link: '/shop',
+    link: 'shop',
   },
   {
     title: '我的',
     icon: 'wode',
     selectedIcon: 'wode',
-    link: '/mine',
+    link: 'mine',
   },
 ];
 
@@ -45,11 +45,11 @@ class MenuBar extends PureComponent {
               title={title}
               icon={<BizIcon type={icon} />}
               selectedIcon={<BizIcon type={selectedIcon} />}
-              selected={pathname === link}
-              onPress={() => Router.push(`${link}`)}
+              selected={pathname.split('/')[1] === link}
+              onPress={() => Router.replace(`/${link}`)}
             >
               {/* 匹配到的children路由进行渲染 */}
-              {children.props.location.pathname === link && children}
+              {children.props.location.pathname.split('/')[1] === link && children}
             </TabBar.Item>
           )
         })}
