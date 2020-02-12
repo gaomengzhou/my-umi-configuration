@@ -6,7 +6,6 @@ import MenuBar from '../components/MenuBar';
 import styles from './index.css';
 
 const BasicLayout = (props) => {
-  console.log(props)
   const [isMenubar, setMenubar] = useState(false)
   const {
     children,
@@ -17,7 +16,8 @@ const BasicLayout = (props) => {
   const reg = /^(\/home|\/shop|\/mine|\/category|\/home\/|\/shop\/|\/mine\/|\/category\/)$/
   if (!reg.test(pathname)) {
     useEffect(() => {
-      return (() => { //这里返回一个函数可以执行Effect清除功能,可以看做componentWillUnmount()
+      // 这里返回一个函数可以执行Effect清除功能,可以看做componentWillUnmount()
+      return (() => {
         if (!isMenubar) {
           setMenubar(true)
         }
@@ -25,7 +25,8 @@ const BasicLayout = (props) => {
     }, [isMenubar, pathname])
   } else {
     useEffect(() => {
-      return (() => { //这里返回一个函数可以执行Effect清除功能,可以看做componentWillUnmount()
+      // 这里返回一个函数可以执行Effect清除功能,可以看做componentWillUnmount()
+      return (() => {
         if (isMenubar) {
           setMenubar(false)
         }
