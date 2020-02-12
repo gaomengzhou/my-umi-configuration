@@ -1,14 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-
 import { connect } from 'dva';
 import React, { useEffect, useState } from 'react';
 import withRouter from 'umi/withRouter';
 import MenuBar from '../components/MenuBar';
 import styles from './index.css';
 
-
-
-function BasicLayout(props) {
+const BasicLayout = (props) => {
   console.log(props)
   const [isMenubar, setMenubar] = useState(false)
   const {
@@ -20,12 +17,20 @@ function BasicLayout(props) {
   const reg = /^(\/home|\/shop|\/mine|\/category|\/home\/|\/shop\/|\/mine\/|\/category\/)$/
   if (!reg.test(pathname)) {
     useEffect(() => {
-      setMenubar(true)
-    }, [pathname])
+      return (() => { //这里返回一个函数可以执行Effect清除功能,可以看做componentWillUnmount()
+        if (!isMenubar) {
+          setMenubar(true)
+        }
+      })()
+    }, [isMenubar, pathname])
   } else {
     useEffect(() => {
-      setMenubar(false)
-    }, [pathname])
+      return (() => { //这里返回一个函数可以执行Effect清除功能,可以看做componentWillUnmount()
+        if (isMenubar) {
+          setMenubar(false)
+        }
+      })()
+    }, [isMenubar, pathname])
   }
   return (
     <div className={styles.normal}>

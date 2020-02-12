@@ -48,8 +48,7 @@ class MenuBar extends PureComponent {
               selected={pathname.split('/')[1] === link}
               onPress={() => Router.replace(`/${link}`)}
             >
-              {/* 匹配到的children路由进行渲染 */}
-              {children.props.location.pathname.split('/')[1] === link && children}
+              {pathname.split('/')[1] === link && children}
             </TabBar.Item>
           )
         })}
