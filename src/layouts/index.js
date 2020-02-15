@@ -17,20 +17,24 @@ const BasicLayout = (props) => {
   if (!reg.test(pathname)) {
     useEffect(() => {
       // 这里返回一个函数可以执行Effect清除功能,可以看做componentWillUnmount()
-      return (() => {
-        if (!isMenuBar) {
-          setMenubar(true)
-        }
-      })()
+      return (
+        (() => {
+          if (!isMenuBar) {
+            setMenubar(true)
+          }
+        })()
+      )
     }, [isMenuBar, pathname])
   } else {
     useEffect(() => {
       // 这里返回一个函数可以执行Effect清除功能,可以看做componentWillUnmount()
-      return (() => {
-        if (isMenuBar) {
-          setMenubar(false)
-        }
-      })()
+      return (
+        (() => {
+          if (isMenuBar) {
+            setMenubar(false)
+          }
+        })()
+      )
     }, [isMenuBar, pathname])
   }
   return (
