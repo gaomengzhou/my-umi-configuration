@@ -33,12 +33,12 @@ const MenuBar = (props) => {
     },
   ];
   const {
-    isMenubar,
+    isMenuBar,
     children,
     pathname,
   } = props;
   return (
-    <TabBar hidden={isMenubar} tintColor={'#e93b3d'} tabBarPosition='bottom'>
+    <TabBar hidden={isMenuBar} tintColor={'#e93b3d'} tabBarPosition='bottom'>
       {tabBarData.map(({ title, icon, selectedIcon, link }) => {
         return (
           <TabBar.Item
@@ -58,13 +58,13 @@ const MenuBar = (props) => {
 }
 
 MenuBar.defaultProps = {
-  isMenubar: false,
+  isMenuBar: false,
   children: null,
   pathname: '/',
 };
 
 MenuBar.propTypes = {
-  isMenubar: PropTypes.bool,
+  isMenuBar: PropTypes.bool,
   children: PropTypes.node,
   pathname: PropTypes.string,
 };

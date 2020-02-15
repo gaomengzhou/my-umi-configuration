@@ -6,7 +6,7 @@ import MenuBar from '../components/MenuBar';
 import styles from './index.css';
 
 const BasicLayout = (props) => {
-  const [isMenubar, setMenubar] = useState(false)
+  const [isMenuBar, setMenubar] = useState(false)
   const {
     children,
     location: {
@@ -18,27 +18,27 @@ const BasicLayout = (props) => {
     useEffect(() => {
       // 这里返回一个函数可以执行Effect清除功能,可以看做componentWillUnmount()
       return (() => {
-        if (!isMenubar) {
+        if (!isMenuBar) {
           setMenubar(true)
         }
       })()
-    }, [isMenubar, pathname])
+    }, [isMenuBar, pathname])
   } else {
     useEffect(() => {
       // 这里返回一个函数可以执行Effect清除功能,可以看做componentWillUnmount()
       return (() => {
-        if (isMenubar) {
+        if (isMenuBar) {
           setMenubar(false)
         }
       })()
-    }, [isMenubar, pathname])
+    }, [isMenuBar, pathname])
   }
   return (
     <div className={styles.normal}>
       {
-        isMenubar
+        isMenuBar
           ? children
-          : <MenuBar pathname={pathname} isMenubar={isMenubar}>{children}</MenuBar>
+          : <MenuBar pathname={pathname} isMenuBar={isMenuBar}>{children}</MenuBar>
       }
     </div>
   );
